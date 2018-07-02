@@ -63,9 +63,19 @@
 </template>
 
 <script>
-	export default {
-	  name: 'Book'
-	}
+import firebase from 'firebase'
+export default {
+  name: 'Book',
+  mounted () {
+    const qwe = firebase.database().ref('Recipe')
+    qwe.once('value').then(this.GetName).catch((error) => console.log(error))
+  },
+  methods: {
+    GetName: function (snapshot) {
+      console.log(snapshot.val())
+    }
+  }
+}
 </script>
 
 <style src="../assets/style.css">
